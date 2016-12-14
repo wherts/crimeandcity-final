@@ -10,19 +10,24 @@ $(document).ready(function() {
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.bottom + margin.top);
 
-  var left = -118.267007,
-      bottom = 34.062552,
-      right = -118.226618,
-      top = 34.108309;
+  d3.xml("../data/echopark.svg").mimeType("image/svg+xml").get(function(error, xml) {
+      if (error) throw error;
+      document.body.appendChild(xml.documentElement);
+});
 
-  var osmUrl = "http://www.openstreetmap.org/?bbox=-118.267%2C34.0623%2C-118.224%2C34.1084";
-  console.log(osmUrl);
-  $.get({url: osmUrl,
-        success: function(data) {
-          console.log("success!");
-          console.log(data);
-        }
-  })
+  // var left = -118.267007,
+  //     bottom = 34.062552,
+  //     right = -118.226618,
+  //     top = 34.108309;
+  //
+  // var osmUrl = "http://www.openstreetmap.org/?bbox=-118.267%2C34.0623%2C-118.224%2C34.1084";
+  // console.log(osmUrl);
+  // $.get({url: osmUrl,
+  //       success: function(data) {
+  //         console.log("success!");
+  //         console.log(data);
+  //       }
+  // })
 
   //draw echo park with openstreetmap data
 });
