@@ -1,33 +1,69 @@
-var margin = {top: 10, right: 50, bottom: 20, left: 50},
-    width = 600 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+var margin = {top: 0, right: 50, bottom: 20, left: 100},
+      width = 800 - margin.left - margin.right,
+      height = 800 - margin.top - margin.bottom;
+
+var mapWidth = 545,
+    mapHeight = 690;
+
+var botLat = 34.0623;
+var leftLng = -118.267;
+var topLat = 34.1084;
+var rightLng = -118.224;
+
+var line = d3.svg.line()
+              .x(function(d) { return d.x; })
+              .y(function(d) { return d.y; })
+              .interpolate("cardinal");
+
+var createListener = function() {
+  $("#wrapper").on("click", function (evt) {
+    console.log(evt.pageX + ", " + (evt.pageY - 80));
+  });
+}
 
 $(document).ready(function() {
-  console.log("Ready!");
   var svg = d3.select("#wrapper")
               .append("svg")
               .attr("class", "box")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.bottom + margin.top);
 
-  d3.xml("../data/echopark.svg").mimeType("image/svg+xml").get(function(error, xml) {
-      if (error) throw error;
-      document.body.appendChild(xml.documentElement);
-});
+  createListener();
+  var map = svg.append("image")
+              .attr("x", 0)
+              .attr("y", 0)
+              .attr("height", mapHeight)
+              .attr("width", mapWidth)
+              .attr("xlink:href", "../data/echopark.svg");
 
-  // var left = -118.267007,
-  //     bottom = 34.062552,
-  //     right = -118.226618,
-  //     top = 34.108309;
-  //
-  // var osmUrl = "http://www.openstreetmap.org/?bbox=-118.267%2C34.0623%2C-118.224%2C34.1084";
-  // console.log(osmUrl);
-  // $.get({url: osmUrl,
-  //       success: function(data) {
-  //         console.log("success!");
-  //         console.log(data);
-  //       }
-  // })
-
-  //draw echo park with openstreetmap data
+  svg.append("circle")
+      .attr("cx", 30)
+      .attr("cy", 30)
+      .attr("r", 20);
+  //187200
+  // var pathData = [
+  //   {x: "126", y: "10"},
+  //   {x: "130", y: "0"},
+  //   {x: "169", y: "3"},
+  //   {x: "225", y: "2"},
+  //   {x: "251", y: "7"},
+  //   {x: "272", y: "14"},
+  //   {x: "297", y: "29"},
+  //   {x: "313", y: "45"},
+  //   {x: "319", y: "72"},
+  //   {x: "319", y: "102"},
+  //   {x: "322", y: "139"},
+  //   {x: "340", y: "177"},
+  //   {x: "348", y: "196"},
+  //   {x: "322", y: "217"},
+  //   {x: "284", y: "174"},
+  //   {x: "262", y: "144"},
+  //   {x: "228", y: "96"},
+  //   {x: "194", y: "60"},
+  //   {x: "158", y: "26"},
+  //   {x: "126", y: "10"}];
+  svg.append("path")
+      .attr("id", "CT187200")
+      .attr("class", "tract")
+      .attr("d", line(pathData));
 });

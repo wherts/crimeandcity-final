@@ -1,0 +1,10 @@
+.box svg {
+  padding: 0px, 0px, 0px, 0px;
+}
+
+.tract {
+  stroke-width: 2px;
+  stroke: blue;
+  fill: none;
+  z-index: 100;
+}
