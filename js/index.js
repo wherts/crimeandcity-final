@@ -197,6 +197,24 @@ $(document).ready(function() {
         .attr("class", "tract")
         .attr("d", line(pathData));
 
+    pathData = [
+      {x: "75", y: "584"},
+      {x: "71", y: "538"},
+      {x: "73", y: "500"},
+      {x: "88", y: "464"},
+      {x: "148", y: "489"},
+      {x: "182", y: "514"},
+      {x: "164", y: "567"},
+      {x: "141", y: "614"},
+      {x: "116", y: "599"},
+      {x: "75", y: "584"}
+    ];
+
+    svg.append("path")
+        .attr("id", "CT197500")
+        .attr("class", "tract")
+        .attr("d", line(pathData));
+
     // 197500
     // 195720
     // 197420
