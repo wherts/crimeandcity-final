@@ -1,11 +1,12 @@
 import sys
 import csv
 from collections import defaultdict
+from operator import itemgetter
 import json
 #years
 validYears = ["2000", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2019", "2020", "2021"]
 
-def organizeDataByYear(years, reader):
+def organizeDataByYear(years, reader, income):
     tracts = None
     for row in reader:
         if tracts is None: #set tracts to be the first row (skip first label aka variable)
@@ -14,8 +15,29 @@ def organizeDataByYear(years, reader):
             year = parseYear(row[0])
             var = parseVariable(row[0])
             data = row[1:]
+            d = defaultdict(int)
             for idxTract, tract in enumerate(tracts):
-                years[year][var][tract] = int(data[idxTract]) if data[idxTract] != "N/A" else data[idxTract]
+                d[tract] = int(data[idxTract]) if data[idxTract] != "N/A" else data[idxTract]
+            years[year].append([var, d])
+            #     years[year].append([var, tract])
+                # years[year][var][tract] = int(data[idxTract]) if data[idxTract] != "N/A" else data[idxTract]
+    if income: #special sorting for income
+        for year, vals in years.items():
+            sortedVals = sorted(vals, key=incomeSort)
+            sortedVals.insert(0, sortedVals.pop())
+            years[year] = sortedVals
+    else:
+        for year, vals in years.items():
+            years[year] = sorted(vals, key=itemgetter(0))
+
+    return years
+
+def incomeSort(item):
+    val = item[0].split()[3]
+    if val == "Less":
+        return val
+    else:
+        return int(val[1:])
 
 def printDictionary(dictionary):
     for key, val in dictionary.items():
@@ -32,9 +54,9 @@ def parseVariable(datum):
         variable = variable[2:]
     return variable
 
-def writeToJson(years):
+def writeToJson(years, postfix):
     for year, data in years.items():
-        fileName = "json/" + year + ".json"
+        fileName = "json/" + year + postfix + ".json"
         with open(fileName, "w") as jsonFile:
             jsonObj = json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
             jsonFile.write(jsonObj)
@@ -46,21 +68,23 @@ if __name__ == '__main__':
     else:
         years = {}
         for year in validYears: #init main storage dict
-            years[year] = defaultdict(defaultdict)
-
-        housing = None
-        with open(sys.argv[1], "r") as housingFile:
-            housing = csv.reader(housingFile)
-            organizeDataByYear(years, housing)
-
-        income = None
-        with open(sys.argv[2], "r") as incomeFile:
-            income = csv.reader(incomeFile)
-            organizeDataByYear(years, income)
+            # years[year] = defaultdict(defaultdict)
+            years[year] = []
 
         population = None
         with open(sys.argv[3], "r") as populationFile:
             population = csv.reader(populationFile)
-            organizeDataByYear(years, population)
+            popData = organizeDataByYear(defaultdict(list), population, False)
+            writeToJson(popData, "-population")
 
-        writeToJson(years)
+        income = None
+        with open(sys.argv[2], "r") as incomeFile:
+            income = csv.reader(incomeFile)
+            incData = organizeDataByYear(defaultdict(list), income, True)
+            writeToJson(incData, "-income")
+
+        housing = None
+        with open(sys.argv[1], "r") as housingFile:
+            housing = csv.reader(housingFile)
+            houseData = organizeDataByYear(defaultdict(list), housing, False)
+            writeToJson(houseData, "-housing")

@@ -6,8 +6,6 @@ Style tooltips
 Draw graph of housing prices, highlight current year
 Fill tract by dominant race (create legend)
 Animate over all years???
-
-change json data to be a list so we can sort the keys by pop/housing/income and alphabetically
 */
 
 var margin = {top: 0, right: 50, bottom: 20, left: 100},
@@ -27,7 +25,9 @@ var svg;
 var tooltip;
 
 var validYears = ["2000", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2019", "2020", "2021"];
-var dataByYear = {};
+var incomeByYear = {},
+    populationByYear = {},
+    housingByYear = {};
 var currentYear = validYears[0];
 
 var line = d3.svg.line()
@@ -69,15 +69,19 @@ var pullInData = function() {
   // debugger;
   for (var year in validYears) {
     year = validYears[year];
-    fileName = year + ".json"
-    filePath = "../json/" + fileName;
+    var prefix = "../json/";
     (function (year) {
-      d3.json(filePath, function(error, jsonObj) {
+      incomeFile = prefix + year + "-income.json";
+
+      d3.json(incomeFile, function(error, jsonObj) {
         if (error) return console.warn(error);
-        dataByYear[year] = jsonObj;
+        incomeByYear[year] = jsonObj;
       });
+
+
     })(year);
   }
+  console.log(incomeByYear);
 };
 
 var updateTooltip = function(tractID) {
