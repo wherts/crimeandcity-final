@@ -31,7 +31,7 @@ def parseVariable(datum):
 
 def writeToJson(years):
     for year, data in years.items():
-        fileName = year + ".json"
+        fileName = "json/" + year + ".json"
         with open(fileName, "w") as jsonFile:
             jsonObj = json.dumps(data, sort_keys=True, indent=4, separators=(',', ': '))
             jsonFile.write(jsonObj)

@@ -6,6 +6,8 @@ Style tooltips
 Draw graph of housing prices, highlight current year
 Fill tract by dominant race (create legend)
 Animate over all years???
+
+change json data to be a list so we can sort the keys by pop/housing/income and alphabetically
 */
 
 var margin = {top: 0, right: 50, bottom: 20, left: 100},
@@ -24,16 +26,20 @@ var tractsGroup;
 var svg;
 var tooltip;
 
+var validYears = ["2000", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2019", "2020", "2021"];
+var dataByYear = {};
+var currentYear = validYears[0];
+
 var line = d3.svg.line()
               .x(function(d) { return d.x; })
               .y(function(d) { return d.y; })
               .interpolate("cardinal");
 
 var drawTracts = function() {
-  d3.json("../data/tracts.json", function(error, json) {
+  d3.json("../json/tracts.json", function(error, json) {
     if (error) return console.warn(error)
     tracts = json["tracts"];
-
+    debugger;
     tractsGroup = svg.append("g").attr("class", "tract").selectAll("g")
       .data(tracts).enter()
       .append("path")
@@ -45,9 +51,7 @@ var drawTracts = function() {
           this.parentNode.appendChild(this);
       })
       .on("mousemove", function(d) {
-          tooltip.text(d[0])
-              .style("left", (d3.event.pageX - 75) + "px")
-              .style("top", (d3.event.pageY + 5) + "px");
+          updateTooltip(d[0]);
       })
       .on("mouseout", function(d) {
           tooltip.style("display", "none");
@@ -55,6 +59,37 @@ var drawTracts = function() {
       });
   });
 }
+
+var pullInData = function() {
+  // debugger;
+  for (var year in validYears) {
+    year = validYears[year];
+    fileName = year + ".json"
+    filePath = "../json/" + fileName;
+    (function (year) {
+      d3.json(filePath, function(error, jsonObj) {
+        console.log("called json");
+        if (error) return console.warn(error);
+        dataByYear[year] = jsonObj;
+      });
+    })(year);
+  }
+  console.log(dataByYear);
+};
+
+var updateTooltip = function(tractID) {
+  currData = dataByYear[currentYear];
+  text = "<h3><b>" + tractID + "</b></h3>";
+  text += "</br>";
+  for (var key in Object.keys(currData)) {
+    key = Object.keys(currData)[key];
+    text += key + ": " + currData[key][tractID];
+    text += "</br>";
+  }
+  tooltip.html(text)
+          .style("left", (d3.event.pageX) + "px")
+          .style("top", (d3.event.pageY - 200) + "px");
+};
 
 $(document).ready(function() {
   svg = d3.select("#wrapper")
@@ -80,5 +115,6 @@ $(document).ready(function() {
       .attr("cy", 30)
       .attr("r", 20);
 
+  pullInData();
   drawTracts();
 });
