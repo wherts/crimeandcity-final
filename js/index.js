@@ -2,6 +2,7 @@
 TODO:
 Add year buttons
 Read in all the population data and display it in the tooltips by current year
+Style tooltips
 Draw graph of housing prices, highlight current year
 Fill tract by dominant race (create legend)
 Animate over all years???
@@ -39,18 +40,18 @@ var drawTracts = function() {
       .attr("d", function(d) {return line(d[1]);})
       .attr("id", function(d) {return d[0];})
       .on("mouseover", function(d) {
-        tooltip.style("display", "inline");
-        $("#" + d[0]).attr("class", "hover");
-        this.parentNode.appendChild(this);
+          tooltip.style("display", "inline");
+          $("#" + d[0]).attr("class", "hover");
+          this.parentNode.appendChild(this);
       })
       .on("mousemove", function(d) {
-        tooltip.text(d[0])
-            .style("left", (d3.event.pageX - 34) + "px")
-            .style("top", (d3.event.pageY - 12) + "px");
+          tooltip.text(d[0])
+              .style("left", (d3.event.pageX - 75) + "px")
+              .style("top", (d3.event.pageY + 5) + "px");
       })
       .on("mouseout", function(d) {
-        tooltip.style("display", "none");
-        $("#" + d[0]).attr("class", "");
+          tooltip.style("display", "none");
+          $("#" + d[0]).attr("class", "");
       });
   });
 }
