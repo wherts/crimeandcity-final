@@ -15,7 +15,7 @@ def organizeDataByYear(years, reader):
             var = parseVariable(row[0])
             data = row[1:]
             for idxTract, tract in enumerate(tracts):
-                years[year][var][tract] = float(data[idxTract]) if data[idxTract] != "N/A" else data[idxTract]
+                years[year][var][tract] = int(data[idxTract]) if data[idxTract] != "N/A" else data[idxTract]
 
 def printDictionary(dictionary):
     for key, val in dictionary.items():
@@ -27,7 +27,10 @@ def parseYear(datum):
 
 def parseVariable(datum):
     splitDatum = datum.split(',')
-    return ' '.join(splitDatum[:-1]).strip()
+    variable = ' '.join(splitDatum[:-1]).strip()
+    if variable[0] == "#": #remove pound sign, counts are self explanatory
+        variable = variable[2:]
+    return variable
 
 def writeToJson(years):
     for year, data in years.items():
