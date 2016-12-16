@@ -19,27 +19,23 @@ def organizeDataByYear(years, reader, t):
             for idxTract, tract in enumerate(tracts):
                 d[tract] = int(data[idxTract]) if data[idxTract] != "N/A" else data[idxTract]
             years[year].append([var, d])
-            #     years[year].append([var, tract])
-                # years[year][var][tract] = int(data[idxTract]) if data[idxTract] != "N/A" else data[idxTract]
+
+    keySort = itemgetter(0)
     if t == 0: #special sorting for income
-        for year, vals in years.items():
-            sortedVals = sorted(vals, key=incomeSort)
+        keySort = incomeSort
+    elif t == 1: #or housing
+        keySort = housingSort
+    for year, vals in years.items():
+        sortedVals = sorted(vals, key=keySort)
+        if t < 2:
             sortedVals.insert(0, sortedVals.pop())
-            years[year] = sortedVals
-    elif t == 1:
-        for year, vals in years.items():
-            sortedVals = sorted(vals, key=housingSort)
-            sortedVals.insert(0, sortedVals.pop())
-            years[year] = sortedVals
-    else:
-        for year, vals in years.items():
-            years[year] = sorted(vals, key=itemgetter(0))
+        years[year] = sortedVals
 
     return years
 
 def incomeSort(item):
     val = item[0].split()[3]
-    if val == "Less":
+    if val == "less":
         return val
     else:
         return int(val[1:])
