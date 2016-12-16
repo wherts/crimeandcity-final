@@ -35,11 +35,16 @@ var line = d3.svg.line()
               .y(function(d) { return d.y; })
               .interpolate("cardinal");
 
+var addClickListener = function() {
+  $("body").on("click", function(evt) {
+    console.log(evt.pageX + ", " + (evt.pageY - 80));
+  });
+}
+
 var drawTracts = function() {
   d3.json("../json/tracts.json", function(error, json) {
     if (error) return console.warn(error)
     tracts = json["tracts"];
-    debugger;
     tractsGroup = svg.append("g").attr("class", "tract").selectAll("g")
       .data(tracts).enter()
       .append("path")
@@ -68,13 +73,11 @@ var pullInData = function() {
     filePath = "../json/" + fileName;
     (function (year) {
       d3.json(filePath, function(error, jsonObj) {
-        console.log("called json");
         if (error) return console.warn(error);
         dataByYear[year] = jsonObj;
       });
     })(year);
   }
-  console.log(dataByYear);
 };
 
 var updateTooltip = function(tractID) {
@@ -117,4 +120,5 @@ $(document).ready(function() {
 
   pullInData();
   drawTracts();
+  addClickListener();
 });
