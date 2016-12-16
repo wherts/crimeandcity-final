@@ -72,27 +72,56 @@ var pullInData = function() {
     var prefix = "../json/";
     (function (year) {
       incomeFile = prefix + year + "-income.json";
-
       d3.json(incomeFile, function(error, jsonObj) {
         if (error) return console.warn(error);
         incomeByYear[year] = jsonObj;
       });
 
+      housingFile = prefix + year + "-housing.json";
+      d3.json(housingFile, function(error, jsonObj) {
+        if (error) return console.warn(error);
+        housingByYear[year] = jsonObj;
+      });
 
+      populationFile = prefix + year + "-population.json";
+      d3.json(populationFile, function(error, jsonObj) {
+        if (error) return console.warn(error);
+        populationByYear[year] = jsonObj;
+      });
     })(year);
   }
-  console.log(incomeByYear);
 };
 
 var updateTooltip = function(tractID) {
-  currData = dataByYear[currentYear];
+  currData = populationByYear[currentYear];
   text = "<h3><b>" + tractID + "</b></h3>";
   text += "</br>";
-  for (var key in Object.keys(currData)) {
-    key = Object.keys(currData)[key];
-    text += key + ": " + currData[key][tractID];
+  for (var pair in currData) {
+    pair = currData[pair];
+    text += pair[0] + ": " + pair[1][tractID];
     text += "</br>";
   }
+
+  currData = incomeByYear[currentYear];
+  // text = "<h3><b>" + tractID + "</b></h3>";
+  // text += "</br>";
+  for (var pair in currData) {
+    pair = currData[pair];
+    text += pair[0] + ": " + pair[1][tractID];
+    text += "</br>";
+  }
+
+  currData = housingByYear[currentYear];
+  // text = "<h3><b>" + tractID + "</b></h3>";
+  // text += "</br>";
+  for (var pair in currData) {
+    pair = currData[pair];
+    text += pair[0] + ": " + pair[1][tractID];
+    text += "</br>";
+  }
+
+
+
   tooltip.html(text)
           .style("left", (d3.event.pageX) + "px")
           .style("top", (d3.event.pageY - 200) + "px");
