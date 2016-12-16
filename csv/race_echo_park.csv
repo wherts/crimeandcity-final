@@ -1,76 +1,76 @@
-Variable,"CT980010, Los Angeles County, CA","CT197700, Los Angeles County, CA","CT197600, Los Angeles County, CA","CT197500, Los Angeles County, CA","CT195720, Los Angeles County, CA","CT197410, Los Angeles County, CA","CT197300, Los Angeles County, CA","CT197420, Los Angeles County, CA","CT197200, Los Angeles County, CA","CT187200, Los Angeles County, CA"
-"# Other Race Population, 2000",N/A,1111,1131,2092,1796,905,1696,1825,1511,1478
-"# Other Race Population, 2008",N/A,1262,1292,2492,2109,1089,1925,2159,1598,1652
-"# Other Race Population, 2009",N/A,1324,1327,2604,2135,1097,1994,2237,1617,1644
-"# Other Race Population, 2010",6,738,607,992,876,655,698,816,1010,1189
-"# Other Race Population, 2011",6,727,599,968,864,634,676,795,983,1169
-"# Other Race Population, 2012",6,662,574,942,842,616,651,769,933,1138
-"# Other Race Population, 2013",5,653,543,876,796,564,601,706,891,1067
-"# Other Race Population, 2014",5,691,563,928,844,607,646,757,946,1137
-"# Other Race Population, 2015",6,690,581,953,846,630,672,786,966,1158
-"# Other Race Population, 2016",6,699,592,976,863,638,684,812,987,1187
-"# Other Race Population, 2020",6,729,623,1024,907,681,724,845,1021,1241
-"# Other Race Population, 2019",5,681,559,921,848,602,638,752,939,1137
-"# Other Race Population, 2021",5,701,602,996,883,651,697,826,1000,1212
-"# White Non-Hispanic Population, 2021",45,284,357,755,246,1618,1138,636,1,49
-"# White Non-Hispanic Population, 2020",44,319,377,798,280,1654,1167,673,1,104
-"# White Non-Hispanic Population, 2019",47,452,447,891,378,1570,1181,756,116,267
-"# White Non-Hispanic Population, 2016",46,340,390,808,289,1617,1167,691,6,123
-"# White Non-Hispanic Population, 2015",45,347,394,811,294,1634,1176,687,8,128
-"# White Non-Hispanic Population, 2014",48,460,450,897,375,1587,1192,762,117,265
-"# White Non-Hispanic Population, 2013",47,457,454,892,376,1555,1170,748,117,264
-"# White Non-Hispanic Population, 2012",44,460,476,946,393,1667,1251,803,122,278
-"# White Non-Hispanic Population, 2011",50,496,510,941,392,1667,1282,827,142,280
-"# White Non-Hispanic Population, 2010",50,492,504,944,389,1690,1297,831,140,279
-"# White Non-Hispanic Population, 2009",N/A,266,188,408,49,808,711,478,504,42
-"# White Non-Hispanic Population, 2008",N/A,263,187,433,62,833,710,477,510,66
-"# White Non-Hispanic Population, 2000",N/A,302,223,507,196,1014,865,550,608,199
-"# Hispanic Population, 2000",N/A,1624,1877,3663,2541,1437,2670,2908,2347,2541
-"# Hispanic Population, 2008",N/A,2050,2318,4625,3249,1768,3240,3642,2709,2938
-"# Hispanic Population, 2009",N/A,2182,2411,4887,3310,1798,3385,3824,2778,2950
-"# Hispanic Population, 2010",23,1538,1306,2251,1668,1401,1735,2110,2048,2389
-"# Hispanic Population, 2011",23,1546,1313,2262,1676,1407,1743,2120,2058,2401
-"# Hispanic Population, 2012",23,1529,1298,2239,1658,1392,1725,2098,2037,2375
-"# Hispanic Population, 2013",24,1579,1341,2312,1713,1439,1782,2168,2104,2454
-"# Hispanic Population, 2014",24,1601,1360,2344,1738,1459,1807,2198,2133,2488
-"# Hispanic Population, 2015",24,1633,1369,2355,1720,1482,1843,2211,2162,2494
-"# Hispanic Population, 2016",24,1634,1375,2375,1732,1474,1845,2251,2187,2524
-"# Hispanic Population, 2019",24,1637,1390,2395,1775,1491,1847,2245,2180,2543
-"# Hispanic Population, 2020",26,1720,1441,2473,1804,1562,1939,2324,2272,2619
-"# Hispanic Population, 2021",26,1723,1444,2496,1813,1555,1946,2359,2298,2642
-"# Black Population, 2000",N/A,103,29,119,63,91,73,84,56,41
-"# Black Population, 2008",N/A,105,27,123,62,93,72,84,50,40
-"# Black Population, 2009",N/A,105,27,126,63,91,73,85,51,41
-"# Black Population, 2010",1,115,59,75,33,84,62,78,40,38
-"# Black Population, 2011",1,116,59,75,33,84,62,78,40,38
-"# Black Population, 2012",1,110,59,75,34,82,62,76,40,39
-"# Black Population, 2013",1,115,60,75,34,83,61,76,40,39
-"# Black Population, 2014",1,117,59,75,35,83,62,78,41,40
-"# Black Population, 2015",1,113,60,76,33,85,62,80,41,40
-"# Black Population, 2016",1,115,61,78,33,86,64,81,42,40
-"# Black Population, 2019",1,118,61,78,36,86,63,81,42,41
-"# Black Population, 2020",1,115,62,78,36,89,65,82,42,40
-"# Black Population, 2021",1,116,62,80,36,90,65,85,42,42
-"# Asian Population, 2000",N/A,3355,799,917,411,325,1000,577,1880,376
-"# Asian Population, 2008",N/A,3534,849,1023,458,363,1073,645,1837,397
-"# Asian Population, 2009",N/A,3664,857,1046,453,366,1095,660,1818,388
-"# Asian Population, 2010",92,2873,505,539,173,397,725,456,1525,393
-"# Asian Population, 2011",91,2926,514,542,177,398,724,458,1533,400
-"# Asian Population, 2012",93,3021,559,601,196,438,793,504,1654,442
-"# Asian Population, 2013",94,2984,536,566,187,406,741,467,1599,418
-"# Asian Population, 2014",99,3035,533,572,189,417,762,481,1618,427
-"# Asian Population, 2015",96,3039,550,589,189,432,791,499,1651,435
-"# Asian Population, 2016",98,3059,552,597,193,435,802,511,1680,442
-"# Asian Population, 2019",103,3198,567,610,204,445,808,512,1723,458
-"# Asian Population, 2020",104,3212,590,634,204,471,855,538,1751,465
-"# Asian Population, 2021",105,3225,591,640,208,467,859,548,1784,475
-"# American Indian and Alaska Native Population, 2010",0,51,15,55,14,24,45,49,30,34
-"# American Indian and Alaska Native Population, 2011",0,51,15,55,14,24,45,50,30,35
-"# American Indian and Alaska Native Population, 2012",0,45,14,50,13,21,40,44,28,32
-"# American Indian and Alaska Native Population, 2013",0,58,17,63,16,27,50,54,32,39
-"# American Indian and Alaska Native Population, 2014",0,54,15,58,15,24,45,51,31,37
-"# American Indian and Alaska Native Population, 2015",0,57,18,63,17,27,52,58,34,40
-"# American Indian and Alaska Native Population, 2016",0,56,18,64,17,28,53,58,35,40
-"# American Indian and Alaska Native Population, 2019",0,56,16,62,16,25,50,54,32,39
-"# American Indian and Alaska Native Population, 2020",0,64,20,72,19,30,59,64,38,46
-"# American Indian and Alaska Native Population, 2021",0,64,20,71,19,30,58,64,38,45
+Variable,"CT187200, Los Angeles County, CA","CT197200, Los Angeles County, CA","CT197420, Los Angeles County, CA","CT197300, Los Angeles County, CA","CT197410, Los Angeles County, CA","CT195720, Los Angeles County, CA","CT197500, Los Angeles County, CA","CT197600, Los Angeles County, CA","CT197700, Los Angeles County, CA","CT980010, Los Angeles County, CA","CT187300, Los Angeles County, CA"
+"# Other Race Population, 2000",1478,1511,1825,1696,905,1796,2092,1131,1111,N/A,947
+"# Other Race Population, 2008",1652,1598,2159,1925,1089,2109,2492,1292,1262,N/A,1160
+"# Other Race Population, 2009",1644,1617,2237,1994,1097,2135,2604,1327,1324,N/A,1181
+"# Other Race Population, 2010",1189,1010,816,698,655,876,992,607,738,6,276
+"# Other Race Population, 2011",1169,983,795,676,634,864,968,599,727,6,267
+"# Other Race Population, 2012",1138,933,769,651,616,842,942,574,662,6,257
+"# Other Race Population, 2013",1067,891,706,601,564,796,876,543,653,5,239
+"# Other Race Population, 2014",1137,946,757,646,607,844,928,563,691,5,259
+"# Other Race Population, 2015",1158,966,786,672,630,846,953,581,690,6,263
+"# Other Race Population, 2016",1187,987,812,684,638,863,976,592,699,6,271
+"# Other Race Population, 2020",1241,1021,845,724,681,907,1024,623,729,6,285
+"# Other Race Population, 2019",1137,939,752,638,602,848,921,559,681,5,257
+"# Other Race Population, 2021",1212,1000,826,697,651,883,996,602,701,5,275
+"# White Non-Hispanic Population, 2021",49,1,636,1138,1618,246,755,357,284,45,1623
+"# White Non-Hispanic Population, 2020",104,1,673,1167,1654,280,798,377,319,44,1614
+"# White Non-Hispanic Population, 2019",267,116,756,1181,1570,378,891,447,452,47,1543
+"# White Non-Hispanic Population, 2016",123,6,691,1167,1617,289,808,390,340,46,1605
+"# White Non-Hispanic Population, 2015",128,8,687,1176,1634,294,811,394,347,45,1596
+"# White Non-Hispanic Population, 2014",265,117,762,1192,1587,375,897,450,460,48,1545
+"# White Non-Hispanic Population, 2013",264,117,748,1170,1555,376,892,454,457,47,1503
+"# White Non-Hispanic Population, 2012",278,122,803,1251,1667,393,946,476,460,44,1593
+"# White Non-Hispanic Population, 2011",280,142,827,1282,1667,392,941,510,496,50,1616
+"# White Non-Hispanic Population, 2010",279,140,831,1297,1690,389,944,504,492,50,1639
+"# White Non-Hispanic Population, 2009",42,504,478,711,808,49,408,188,266,N/A,1090
+"# White Non-Hispanic Population, 2008",66,510,477,710,833,62,433,187,263,N/A,1117
+"# White Non-Hispanic Population, 2000",199,608,550,865,1014,196,507,223,302,N/A,1363
+"# Hispanic Population, 2000",2541,2347,2908,2670,1437,2541,3663,1877,1624,N/A,1171
+"# Hispanic Population, 2008",2938,2709,3642,3240,1768,3249,4625,2318,2050,N/A,1490
+"# Hispanic Population, 2009",2950,2778,3824,3385,1798,3310,4887,2411,2182,N/A,1529
+"# Hispanic Population, 2010",2389,2048,2110,1735,1401,1668,2251,1306,1538,23,751
+"# Hispanic Population, 2011",2401,2058,2120,1743,1407,1676,2262,1313,1546,23,755
+"# Hispanic Population, 2012",2375,2037,2098,1725,1392,1658,2239,1298,1529,23,747
+"# Hispanic Population, 2013",2454,2104,2168,1782,1439,1713,2312,1341,1579,24,772
+"# Hispanic Population, 2014",2488,2133,2198,1807,1459,1738,2344,1360,1601,24,782
+"# Hispanic Population, 2015",2494,2162,2211,1843,1482,1720,2355,1369,1633,24,800
+"# Hispanic Population, 2016",2524,2187,2251,1845,1474,1732,2375,1375,1634,24,812
+"# Hispanic Population, 2019",2543,2180,2245,1847,1491,1775,2395,1390,1637,24,799
+"# Hispanic Population, 2020",2619,2272,2324,1939,1562,1804,2473,1441,1720,26,847
+"# Hispanic Population, 2021",2642,2298,2359,1946,1555,1813,2496,1444,1723,26,857
+"# Black Population, 2000",41,56,84,73,91,63,119,29,103,N/A,166
+"# Black Population, 2008",40,50,84,72,93,62,123,27,105,N/A,179
+"# Black Population, 2009",41,51,85,73,91,63,126,27,105,N/A,178
+"# Black Population, 2010",38,40,78,62,84,33,75,59,115,1,99
+"# Black Population, 2011",38,40,78,62,84,33,75,59,116,1,98
+"# Black Population, 2012",39,40,76,62,82,34,75,59,110,1,96
+"# Black Population, 2013",39,40,76,61,83,34,75,60,115,1,97
+"# Black Population, 2014",40,41,78,62,83,35,75,59,117,1,101
+"# Black Population, 2015",40,41,80,62,85,33,76,60,113,1,100
+"# Black Population, 2016",40,42,81,64,86,33,78,61,115,1,102
+"# Black Population, 2019",41,42,81,63,86,36,78,61,118,1,104
+"# Black Population, 2020",40,42,82,65,89,36,78,62,115,1,104
+"# Black Population, 2021",42,42,85,65,90,36,80,62,116,1,105
+"# Asian Population, 2000",376,1880,577,1000,325,411,917,799,3355,N/A,563
+"# Asian Population, 2008",397,1837,645,1073,363,458,1023,849,3534,N/A,661
+"# Asian Population, 2009",388,1818,660,1095,366,453,1046,857,3664,N/A,658
+"# Asian Population, 2010",393,1525,456,725,397,173,539,505,2873,92,611
+"# Asian Population, 2011",400,1533,458,724,398,177,542,514,2926,91,610
+"# Asian Population, 2012",442,1654,504,793,438,196,601,559,3021,93,667
+"# Asian Population, 2013",418,1599,467,741,406,187,566,536,2984,94,627
+"# Asian Population, 2014",427,1618,481,762,417,189,572,533,3035,99,654
+"# Asian Population, 2015",435,1651,499,791,432,189,589,550,3039,96,654
+"# Asian Population, 2016",442,1680,511,802,435,193,597,552,3059,98,674
+"# Asian Population, 2019",458,1723,512,808,445,204,610,567,3198,103,691
+"# Asian Population, 2020",465,1751,538,855,471,204,634,590,3212,104,710
+"# Asian Population, 2021",475,1784,548,859,467,208,640,591,3225,105,719
+"# American Indian and Alaska Native Population, 2010",34,30,49,45,24,14,55,15,51,0,16
+"# American Indian and Alaska Native Population, 2011",35,30,50,45,24,14,55,15,51,0,16
+"# American Indian and Alaska Native Population, 2012",32,28,44,40,21,13,50,14,45,0,15
+"# American Indian and Alaska Native Population, 2013",39,32,54,50,27,16,63,17,58,0,17
+"# American Indian and Alaska Native Population, 2014",37,31,51,45,24,15,58,15,54,0,16
+"# American Indian and Alaska Native Population, 2015",40,34,58,52,27,17,63,18,57,0,18
+"# American Indian and Alaska Native Population, 2016",40,35,58,53,28,17,64,18,56,0,19
+"# American Indian and Alaska Native Population, 2019",39,32,54,50,25,16,62,16,56,0,17
+"# American Indian and Alaska Native Population, 2020",46,38,64,59,30,19,72,20,64,0,21
+"# American Indian and Alaska Native Population, 2021",45,38,64,58,30,19,71,20,64,0,20
