@@ -1,9 +1,7 @@
 /*
 TODO:
-Add radio button to select what data you want in the tooltip
-Style tooltips
 Add year buttons
-Add changing between years
+Add year navigation
 Draw graph of housing prices, highlight current year
 Fill tract by dominant data item (create legend)
 Animate over all years???
@@ -95,7 +93,6 @@ var pullInData = function() {
 };
 
 var updateTooltip = function(tractID) {
-  debugger;
   var currData;
   if (currentDataType == "Population") {
     currData = populationByYear[currentYear];
@@ -104,34 +101,16 @@ var updateTooltip = function(tractID) {
   } else {
     currData = incomeByYear[currentYear];
   }
-  text = "<h3><b>" + tractID + "</b></h3>";
+  text = "<h3><b>" + tractID + " (" + currentYear + ")" + "</b></h3>";
   text += "</br>";
   for (var pair in currData) {
     pair = currData[pair];
     text += pair[0] + ": " + pair[1][tractID];
     text += "</br>";
   }
-
-  // text = "<h3><b>" + tractID + "</b></h3>";
-  // text += "</br>";
-  // for (var pair in currData) {
-  //   pair = currData[pair];
-  //   text += pair[0] + ": " + pair[1][tractID];
-  //   text += "</br>";
-  // }
-  //
-  // // text = "<h3><b>" + tractID + "</b></h3>";
-  // // text += "</br>";
-  // for (var pair in currData) {
-  //   pair = currData[pair];
-  //   text += pair[0] + ": " + pair[1][tractID];
-  //   text += "</br>";
-
-
-
   tooltip.html(text)
           .style("left", (d3.event.pageX) + "px")
-          .style("top", (d3.event.pageY - 200) + "px");
+          .style("top", (d3.event.pageY - 15) + "px");
 };
 
 var addRadioListener = function() {
