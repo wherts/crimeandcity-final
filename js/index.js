@@ -1,15 +1,16 @@
 /*
 TODO:
-Fill tract by dominant data item (create legend)
 Draw graph of housing prices, highlight current year
+
+Fill tract by dominant data item (create legend)
 Animate over all years???
 Test hosting on github
 write on the page
 Submit!
 */
 
-var margin = {top: 0, right: 50, bottom: 20, left: 100},
-      width = 800 - margin.left - margin.right,
+var margin = {top: 0, right: 0, bottom: 0, left: 0},
+      width = 545 - margin.left - margin.right,
       height = 800 - margin.top - margin.bottom;
 
 var mapWidth = 545,
@@ -21,7 +22,7 @@ var topLat = 34.1084;
 var rightLng = -118.224;
 
 var tractsGroup;
-var svg;
+var mapSvg, graphSvg;
 var tooltip;
 
 var validYears = ["2000", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2019", "2020", "2021"];
@@ -46,9 +47,11 @@ var drawTracts = function() {
   d3.json("../json/tracts.json", function(error, json) {
     if (error) return console.warn(error)
     tracts = json["tracts"];
-    tractsGroup = svg.append("g").attr("class", "tract").selectAll("g")
+    tractsGroup = mapSvg.append("g").attr("class", "tract").selectAll("g")
       .data(tracts).enter()
       .append("path")
+      .style("fill", "black")
+      .style("fill-opacity", 0.5)
       .attr("d", function(d) {return line(d[1]);})
       .attr("id", function(d) {return d[0];})
       .on("mouseover", function(d) {
@@ -67,7 +70,6 @@ var drawTracts = function() {
 }
 
 var pullInData = function() {
-  // debugger;
   for (var year in validYears) {
     year = validYears[year];
     var prefix = "../json/";
@@ -114,9 +116,15 @@ var updateTooltip = function(tractID) {
           .style("top", (d3.event.pageY - 15) + "px");
 };
 
+var updateTractFill = function() {
+  console.log("changing");
+  $(".tract")
+}
+
 var addRadioListener = function() {
   $(".dataTypes").on('click', function() {
     currentDataType = $(this).val();
+    updateTractFill();
   });
 };
 
@@ -126,8 +134,8 @@ var addDropdownListener = function() {
   });
 };
 
-$(document).ready(function() {
-  svg = d3.select("#wrapper")
+var addMap = function() {
+  mapSvg = d3.select("#mapWrapper")
               .append("svg")
               .attr("class", "box")
               .attr("width", width + margin.left + margin.right)
@@ -138,21 +146,40 @@ $(document).ready(function() {
         				.attr("class", "tooltip")
                 .style("display", "none");
 
-  var map = svg.append("image")
+  var map = mapSvg.append("image")
               .attr("x", 0)
               .attr("y", 0)
               .attr("height", mapHeight)
               .attr("width", mapWidth)
               .attr("xlink:href", "../data/echopark.svg");
 
-  svg.append("circle")
+  mapSvg.append("circle")
       .attr("cx", 30)
       .attr("cy", 30)
       .attr("r", 20);
+}
 
+var addGraph = function() {
+  graphSvg = d3.select("#graphWrapper")
+                .append("svg")
+                .attr("class", "box")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.bottom + margin.top);
+
+                var graph = graphSvg.append("image")
+                            .attr("x", 0)
+                            .attr("y", 0)
+                            .attr("height", mapHeight)
+                            .attr("width", mapWidth)
+                            .attr("xlink:href", "../data/echopark.svg");
+}
+
+$(document).ready(function() {
+  addMap();
+  addGraph();
   pullInData();
   drawTracts();
-  addClickListener();
+  // addClickListener();
   addRadioListener();
   addDropdownListener();
 });

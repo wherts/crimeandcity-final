@@ -1,12 +1,98 @@
-.box svg {
-  padding: 0px, 0px, 0px, 0px;
+body {
+  font-family: "Arial", sans-serif;
+}
+
+.headerWrapper {
+  width: 100%;
+  height: auto;
+}
+
+.header {
+  display: inline-block;
+  margin-top: 0px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+
+.header#title {
+  margin-left: 10px;
+}
+
+.header#subtitle {
+  display: block;
+  margin-left: 10px;
+}
+
+.navWrapper {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.navWrapper p {
+  margin-bottom: 4px;
+}
+
+.mapNav {
+  display: inline-block;
+  float: left;
+  width: auto;
+  height: auto;
+  margin-left: 45px;
+}
+
+.mapNav#left {
+  float: left;
+  margin-right: 20px
+}
+
+.mapNav#right {
+  float: right;
+}
+
+.graphNav {
+  display: inline-block;
+  float: right;
+  width: auto;
+  height: auto;
+  margin-right: 45px;
+}
+
+.selector {
+   height: 28px;
+   width: 70px;
+   font-size: 16px;
+   margin-left: 30px;
+}
+
+.graphNav#left {
+  float: left;
+  margin-right: 20px;
+}
+
+.graphNav#right {
+  float: right;
+}
+
+#mapWrapper {
+  display: inline-block;
+  float: left;
+  width: auto;
+  margin-left: 40px;
+}
+
+#graphWrapper {
+  display: inline-block;
+  float: right;
+  width: auto;
+  margin-right: 40px;
 }
 
 path {
   stroke-width: 2px;
   stroke: black;
-  fill: black;
-  fill-opacity: 0.5;
   z-index: 1;
 }
 
@@ -35,17 +121,4 @@ path {
   margin-bottom: -12px;
   margin-top: 0px;
   font-size: 14px;
-}
-
-.navWrapper {
-  display: inline-block;
-}
-
-.nav#left {
-  float: left;
-  margin-right: 50px
-}
-
-.nav#right {
-  float: right;
 }
