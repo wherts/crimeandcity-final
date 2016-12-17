@@ -1,10 +1,11 @@
 /*
 TODO:
-Add year buttons
-Add year navigation
-Draw graph of housing prices, highlight current year
 Fill tract by dominant data item (create legend)
+Draw graph of housing prices, highlight current year
 Animate over all years???
+Test hosting on github
+write on the page
+Submit!
 */
 
 var margin = {top: 0, right: 50, bottom: 20, left: 100},
@@ -119,6 +120,12 @@ var addRadioListener = function() {
   });
 };
 
+var addDropdownListener = function() {
+  $(".pickYear").on('change', function() {
+    currentYear = $(this).val();
+  });
+};
+
 $(document).ready(function() {
   svg = d3.select("#wrapper")
               .append("svg")
@@ -147,4 +154,5 @@ $(document).ready(function() {
   drawTracts();
   addClickListener();
   addRadioListener();
+  addDropdownListener();
 });
