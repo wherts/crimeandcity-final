@@ -36,3 +36,16 @@ path {
   margin-top: 0px;
   font-size: 14px;
 }
+
+.navWrapper {
+  display: inline-block;
+}
+
+.nav#left {
+  float: left;
+  margin-right: 50px
+}
+
+.nav#right {
+  float: right;
+}

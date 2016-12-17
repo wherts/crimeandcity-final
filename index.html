@@ -4,7 +4,9 @@
     <title>Crime and City Final</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="https://d3js.org/queue.v1.min.js"></script>
@@ -16,8 +18,8 @@
   <body>
 
   <h1>Title</h1>
-  <div>
-    <div>
+  <div class="navWrapper">
+    <div class="nav" id="left">
       <p>Choose data year:</p>
       <select class="pickYear">
         <option value="2000">2000</option>
@@ -35,7 +37,7 @@
         <option value="2021">2021</option>
       </select>
     </div>
-    <div>
+    <div class="nav" id="right">
       <p>Select data to investigate:</p>
       <input class="dataTypes" type="radio" name="data" value="Population" checked> Population
       <input class="dataTypes" type="radio" name="data" value="Housing"> Housing
