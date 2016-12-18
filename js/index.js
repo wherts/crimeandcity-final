@@ -26,7 +26,8 @@ var mapSvg, graphSvg;
 var tooltip;
 
 var validYears = ["2000", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2019", "2020", "2021"];
-var middleYears = ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"];
+var validTracts = ["187200","197200","197420","197300","197410","195720","197500","197600","197700","980010","187300"];
+
 var incomeByYear = {},
     populationByYear = {},
     housingByYear = {};
@@ -36,7 +37,9 @@ var incomeByTract = {},
     housingByTract = {};
 
 var currentYear = validYears[0];
-var currentDataType = "Population";
+var currentTract = "187200";
+var currentDataMap = "Population";
+var currentDataGraph = "Population";
 
 var line = d3.svg.line()
               .x(function(d) { return d.x; })
@@ -75,7 +78,7 @@ var drawTracts = function() {
   });
 }
 
-var pullInData = function() {
+var pullInMapData = function(callback) {
   for (var year in validYears) {
     year = validYears[year];
     var prefix = "../json/";
@@ -99,13 +102,45 @@ var pullInData = function() {
       });
     })(year);
   }
+  callback(null);
 };
+
+// var pullInGraphData = function(callback) {
+//   var incomeByTractLocal = {},
+//       housingByTractLocal = {},
+//       populationByTractLocal = {};
+//   for (var tract in validTracts) {
+//     tract = validTracts[tract];
+//     var prefix = "../json/";
+//
+//     (function(tID) {
+//       incomeFile = prefix + tID + "-income.json";
+//       d3.json(incomeFile, function(error, jsonObj) {
+//         if (error) return console.warn(error);
+//         incomeByTractLocal[tID] = jsonObj;
+//       });
+//
+//       housingFile = prefix + tID + "-housing.json";
+//       d3.json(housingFile, function(error, jsonObj) {
+//         if (error) return console.warn(error);
+//         housingByTractLocal[tID] = jsonObj;
+//       });
+//
+//       populationFile = prefix + tID + "-population.json";
+//       d3.json(populationFile, function(error, jsonObj) {
+//         if (error) return console.warn(error);
+//         populationByTractLocal[tID] = jsonObj;
+//       });
+//     })(tract);
+//   }
+//   callback(null, [incomeByTractLocal, housingByTractLocal, populationByTractLocal]);
+// };
 
 var updateTooltip = function(tractID) {
   var currData;
-  if (currentDataType == "Population") {
+  if (currentDataMap == "Population") {
     currData = populationByYear[currentYear];
-  } else if (currentDataType == "Housing") {
+  } else if (currentDataMap == "Housing") {
     currData = housingByYear[currentYear];
   } else {
     currData = incomeByYear[currentYear];
@@ -123,20 +158,29 @@ var updateTooltip = function(tractID) {
 };
 
 var updateTractFill = function() {
+  //TODO
   console.log("changing");
   $(".tract")
 }
 
 var addRadioListener = function() {
-  $(".dataTypes").on('click', function() {
-    currentDataType = $(this).val();
-    updateTractFill();
+  $(".dataTypesMap").on('click', function() {
+    currentDataMap = $(this).val();
+    // updateTractFill();
   });
+
+  $(".dataTypesGraph").on('click', function() {
+    currentDataGraph = $(this).val();
+  })
 };
 
 var addDropdownListener = function() {
-  $(".pickYear").on('change', function() {
+  $("#selectYear").on('change', function() {
     currentYear = $(this).val();
+  });
+
+  $("#selectTract").on('change', function() {
+    currentTract = $(this).val();
   });
 };
 
@@ -158,11 +202,21 @@ var addMap = function() {
               .attr("height", mapHeight)
               .attr("width", mapWidth)
               .attr("xlink:href", "../data/echopark.svg");
+}
 
-  mapSvg.append("circle")
-      .attr("cx", 30)
-      .attr("cy", 30)
-      .attr("r", 20);
+var findMaxY = function(tractDict) {
+  var maxY = -1;
+  // console.log(tractDict);
+  // console.log(Object.keys(tractDict));
+  for (var tract in validTracts) {
+    tract = validTracts[tract];
+    // console.log(tractDict[tract]);
+    for (var key in Object.keys(tractDict[tract])) {
+      // variable  = tractDict[tract][key];
+      console.log(key);
+    }
+  }
+  return maxY;
 }
 
 var addGraph = function() {
@@ -174,7 +228,6 @@ var addGraph = function() {
 
   var xScale = d3.scale.linear()
                   .domain([0, validYears.length])
-                  // .domain(d3.extent(middleYears, function(d) { return d; }))
                   .range([20, width]);
 
   var xAxis = d3.svg.axis()
@@ -182,9 +235,18 @@ var addGraph = function() {
                 .tickValues(validYears)
                 .orient("bottom")
                 .tickSize(-height, 1);
-
- // var yScale = d3.scale.linear()
- //                .domain([0, d3.max()])
+ //  debugger;
+ // debugger;
+ //find max y val, couldn't do it with external function
+ // var maxY = -1;
+ //
+ // console.log($.isEmptyObject(populationByTract));
+var maxY = findMaxY(populationByTract);
+console.log(maxY);
+// var yScale = d3.scale.linear()
+//                .domain([0, 100])
+//                .range([height, 20]);
+// console.log(populationByTract);
 
   graphSvg.append("g")
           .attr("class", "axis")
@@ -203,14 +265,42 @@ var addGraph = function() {
             // .attr("tras", -30)
             .attr("text-anchor", "middle")
             .text(function(d) {return d;});
+
 }
 
 $(document).ready(function() {
-  addMap();
-  addGraph();
-  pullInData();
-  drawTracts();
-  // addClickListener();
-  addRadioListener();
-  addDropdownListener();
+  queue().defer(pullInMapData)
+    .await(function(error) {
+      if (error) return console.warn(error);
+      addMap();
+      drawTracts();
+      addRadioListener();
+      addDropdownListener();
+    });
+
+  var graphQueue = queue();
+
+  for (var tract in validTracts) {
+    tract = validTracts[tract];
+    var prefix = "../json/";
+    incomeFile = prefix + tract + "-income.json"
+    populationFile = prefix + tract + "-population.json";
+    housingFile = prefix + tract + "-housing.json";
+
+    graphQueue.defer(d3.json, incomeFile);
+    graphQueue.defer(d3.json, populationFile);
+    graphQueue.defer(d3.json, housingFile);
+  }
+
+  graphQueue.awaitAll(function(error, graphData) {
+      if (error) return console.warn(error);
+      for (var tIdx in validTracts) {
+        tID = validTracts[tIdx];
+        var i = tIdx * 3;
+        incomeByTract[tID] = graphData[i];
+        populationByTract[tID] = graphData[i + 1];
+        housingByTract[tID] = graphData[i + 2];
+      }
+      addGraph();
+    });
 });
