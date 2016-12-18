@@ -206,14 +206,16 @@ var addMap = function() {
 
 var findMaxY = function(tractDict) {
   var maxY = -1;
-  // console.log(tractDict);
-  // console.log(Object.keys(tractDict));
   for (var tract in validTracts) {
     tract = validTracts[tract];
-    // console.log(tractDict[tract]);
-    for (var key in Object.keys(tractDict[tract])) {
-      // variable  = tractDict[tract][key];
-      console.log(key);
+    var keys = Object.keys(tractDict[tract]);
+    for (var k in keys) {
+      variable  = keys[k];
+      data = tractDict[tract][variable];
+      currMax = d3.max(data, function(d) {return d;});
+      if (currMax > maxY) {
+        maxY = currMax;
+      }
     }
   }
   return maxY;
@@ -226,27 +228,31 @@ var addGraph = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.bottom + margin.top);
 
+  var graphShift = 30;
   var xScale = d3.scale.linear()
                   .domain([0, validYears.length])
-                  .range([20, width]);
+                  .range([graphShift, width]);
+
+  var maxY = findMaxY(populationByTract);
+  var yScale = d3.scale.linear()
+                  .domain([0, maxY])
+                  .range([(height - 45), 0]);
 
   var xAxis = d3.svg.axis()
                 .scale(xScale)
                 .tickValues(validYears)
                 .orient("bottom")
                 .tickSize(-height, 1);
- //  debugger;
- // debugger;
- //find max y val, couldn't do it with external function
- // var maxY = -1;
- //
- // console.log($.isEmptyObject(populationByTract));
-var maxY = findMaxY(populationByTract);
-console.log(maxY);
-// var yScale = d3.scale.linear()
-//                .domain([0, 100])
-//                .range([height, 20]);
-// console.log(populationByTract);
+
+  var yAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .tickSize(1);
+
+  graphSvg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(" + graphShift + ", 0)")
+          .call(yAxis);
 
   graphSvg.append("g")
           .attr("class", "axis")
@@ -262,11 +268,13 @@ console.log(maxY);
       .attr("transform", function(d, i) {return "translate(" + (xScale(i) + 20) + "," + (height - 20) + ")rotate(-45)"});
 
   yearLabels.append("text")
-            // .attr("tras", -30)
             .attr("text-anchor", "middle")
             .text(function(d) {return d;});
-
 }
+
+var drawGraph = function() {
+
+};
 
 $(document).ready(function() {
   queue().defer(pullInMapData)
@@ -302,5 +310,6 @@ $(document).ready(function() {
         housingByTract[tID] = graphData[i + 2];
       }
       addGraph();
+      drawGraph();
     });
 });

@@ -129,3 +129,7 @@ path {
   margin-top: 0px;
   font-size: 14px;
 }
+
+.tick text {
+  font-size: 10px;
+}
