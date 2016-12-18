@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.0/d3.js"></script> -->
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="https://d3js.org/queue.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
@@ -24,6 +25,12 @@
   <div class="navWrapper">
     <div class="mapNav">
       <div class="mapNav" id="left">
+        <p>Select data to investigate:</p>
+        <input class="dataTypesMap" type="radio" name="dataMap" value="Population" checked> Population
+        <input class="dataTypesMap" type="radio" name="dataMap" value="Housing"> Housing
+        <input class="dataTypesMap" type="radio" name="dataMap" value="Income">  Income
+      </div>
+      <div class="mapNav" id="right">
         <p>Choose data year:</p>
         <select class="selector">
           <option value="2000">2000</option>
@@ -41,24 +48,30 @@
           <option value="2021">2021</option>
         </select>
       </div>
-      <div class="mapNav" id="right">
-        <p>Select data to investigate:</p>
-        <input class="dataTypes" type="radio" name="data" value="Population" checked> Population
-        <input class="dataTypes" type="radio" name="data" value="Housing"> Housing
-        <input class="dataTypes" type="radio" name="data" value="Income">  Income
-      </div>
     </div>
 
     <div class="graphNav">
       <div class="graphNav" id="left">
-        <p>Fake:</p>
-        <select class="selector">
-          <option value="2000">2000</option>
-        </select>
+        <p>Select data to investigate:</p>
+        <input class="dataTypesGraph" type="radio" name="dataGraph" value="Population" checked> Population
+        <input class="dataTypesGraph" type="radio" name="dataGraph" value="Housing"> Housing
+        <input class="dataTypesGraph" type="radio" name="dataGraph" value="Income">  Income
       </div>
       <div class="graphNav" id="right">
-        <p>Fake:</p>
-        <input class="dataTypes" type="radio" name="data" value="None"> None
+        <p>Choose census tract:</p>
+        <select class="selector">
+          <option value="187200">187200</option>
+          <option value="195720">195720</option>
+          <option value="197110">197110</option>
+          <option value="197200">197200</option>
+          <option value="197300">197300</option>
+          <option value="197410">197410</option>
+          <option value="197420">197420</option>
+          <option value="197500">197500</option>
+          <option value="197600">197600</option>
+          <option value="197700">197700</option>
+          <option value="980010">980010</option>
+        </select>
       </div>
     </div>
 

@@ -11,7 +11,7 @@ Submit!
 
 var margin = {top: 0, right: 0, bottom: 0, left: 0},
       width = 545 - margin.left - margin.right,
-      height = 800 - margin.top - margin.bottom;
+      height = 700 - margin.top - margin.bottom;
 
 var mapWidth = 545,
     mapHeight = 690;
@@ -26,9 +26,15 @@ var mapSvg, graphSvg;
 var tooltip;
 
 var validYears = ["2000", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2019", "2020", "2021"];
+var middleYears = ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"];
 var incomeByYear = {},
     populationByYear = {},
     housingByYear = {};
+
+var incomeByTract = {},
+    populationByTract = {},
+    housingByTract = {};
+
 var currentYear = validYears[0];
 var currentDataType = "Population";
 
@@ -166,12 +172,37 @@ var addGraph = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.bottom + margin.top);
 
-                var graph = graphSvg.append("image")
-                            .attr("x", 0)
-                            .attr("y", 0)
-                            .attr("height", mapHeight)
-                            .attr("width", mapWidth)
-                            .attr("xlink:href", "../data/echopark.svg");
+  var xScale = d3.scale.linear()
+                  .domain([0, validYears.length])
+                  // .domain(d3.extent(middleYears, function(d) { return d; }))
+                  .range([20, width]);
+
+  var xAxis = d3.svg.axis()
+                .scale(xScale)
+                .tickValues(validYears)
+                .orient("bottom")
+                .tickSize(-height, 1);
+
+ // var yScale = d3.scale.linear()
+ //                .domain([0, d3.max()])
+
+  graphSvg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(0, " + (height - 45) + ")")
+          .call(xAxis);
+
+  //adding labels
+  var yearLabels = graphSvg.append("g")
+      .attr("class", "yearLabel")
+      .selectAll(".yearLabel")
+      .data(validYears).enter()
+      .append("g")
+      .attr("transform", function(d, i) {return "translate(" + (xScale(i) + 20) + "," + (height - 20) + ")rotate(-45)"});
+
+  yearLabels.append("text")
+            // .attr("tras", -30)
+            .attr("text-anchor", "middle")
+            .text(function(d) {return d;});
 }
 
 $(document).ready(function() {

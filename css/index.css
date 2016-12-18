@@ -40,7 +40,7 @@ body {
   float: left;
   width: auto;
   height: auto;
-  margin-left: 45px;
+  margin-left: 40px;
 }
 
 .mapNav#left {
@@ -60,7 +60,7 @@ body {
   margin-right: 45px;
 }
 
-.selector {
+.mapNav .selector {
    height: 28px;
    width: 70px;
    font-size: 16px;
@@ -74,6 +74,13 @@ body {
 
 .graphNav#right {
   float: right;
+}
+
+.graphNav .selector {
+   height: 28px;
+   width: 85px;
+   font-size: 16px;
+   margin-left: 40px;
 }
 
 #mapWrapper {
