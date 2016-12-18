@@ -1,7 +1,8 @@
 /*
 TODO:
-Dynamic graph updating - lines
 dynamic graph updating - animation
+Handle N/A data in graph
+Handle fewer than 13 vars (python append 0's to front)
 tooltip over graph line
 Fill tract by dominant data item (create legend)???
 Visual link between map and graph
@@ -209,7 +210,7 @@ var addGraph = function() {
   var maxY = findMaxY(populationByTract[currentTract]);
   yScale = d3.scale.linear()
                   .domain([0, maxY])
-                  .range([(height - 45), 0]);
+                  .range([(height - 45), 5]);
 
   var xAxis = d3.svg.axis()
                 .scale(xScale)
@@ -220,6 +221,7 @@ var addGraph = function() {
   yAxis = d3.svg.axis()
                   .scale(yScale)
                   .orient("left")
+                  .ticks(10)
                   .tickSize(1);
 
   graphSvg.append("g")
@@ -247,7 +249,7 @@ var addGraph = function() {
 
 var drawGraph = function() {
   d3.selectAll("path.line").remove();
-  
+
   var currDict;
   if (currentDataGraph == "Population") {
     currDict = populationByTract;
@@ -258,17 +260,20 @@ var drawGraph = function() {
   }
 
   var maxY = findMaxY(currDict[currentTract]);
-  console.log(maxY);
   yScale = d3.scale.linear()
                   .domain([0, maxY])
-                  .range([(height - 45), 0]);
+                  .range([(height - 45), 5]);
 
   yAxis = d3.svg.axis()
                   .scale(yScale)
                   .orient("left")
+                  .ticks(10)
                   .tickSize(1);
 
   graphSvg.select(".yaxis")
+          .transition()
+          .duration(1500)
+          .ease("quadOut")
           .call(yAxis);
 
   var line = d3.svg.line()
@@ -280,12 +285,20 @@ var drawGraph = function() {
   for (var k in keys) {
     var variable = keys[k];
     var lineData = data[variable];
-    graphSvg.append("path")
+    var path = graphSvg.append("path")
               .attr("class", "line")
               .attr("id", variable)
               .style("fill", "None")
               .style("stroke", lineColors[k])
               .attr("d", line(lineData));
+
+    var totalLength = path.node().getTotalLength();
+    path.attr("stroke-dasharray", totalLength + " " + totalLength)
+        .attr("stroke-dashoffset", totalLength)
+        .transition()
+        .duration(2000)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0)
   }
 };
 
