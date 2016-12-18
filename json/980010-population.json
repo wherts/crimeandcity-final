@@ -12,9 +12,9 @@
         0
     ],
     "Asian Population": [
-        "N/A",
-        "N/A",
-        "N/A",
+        0,
+        0,
+        0,
         92,
         91,
         93,
@@ -27,9 +27,9 @@
         105
     ],
     "Black Population": [
-        "N/A",
-        "N/A",
-        "N/A",
+        0,
+        0,
+        0,
         1,
         1,
         1,
@@ -42,9 +42,9 @@
         1
     ],
     "Hispanic Population": [
-        "N/A",
-        "N/A",
-        "N/A",
+        0,
+        0,
+        0,
         23,
         23,
         23,
@@ -57,9 +57,9 @@
         26
     ],
     "Other Race Population": [
-        "N/A",
-        "N/A",
-        "N/A",
+        0,
+        0,
+        0,
         6,
         6,
         6,
@@ -72,9 +72,9 @@
         5
     ],
     "White Non-Hispanic Population": [
-        "N/A",
-        "N/A",
-        "N/A",
+        0,
+        0,
+        0,
         50,
         50,
         44,

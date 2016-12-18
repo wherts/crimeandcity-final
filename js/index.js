@@ -1,9 +1,8 @@
 /*
 TODO:
-dynamic graph updating - animation
-Handle N/A data in graph
 Handle fewer than 13 vars (python append 0's to front)
 tooltip over graph line
+animate paths drawing
 Fill tract by dominant data item (create legend)???
 Visual link between map and graph
 Test hosting on github

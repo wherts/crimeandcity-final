@@ -17,7 +17,7 @@ def organizeDataByTract(tracts, reader, type):
             data = row[1:]
             vals = []
             for idxTract, tID in enumerate(validTracts):
-                d = int(data[idxTract]) if data[idxTract] != "N/A" else data[idxTract]
+                d = int(data[idxTract]) if data[idxTract] != "N/A" else 0
                 tracts[tID][variable].append((year, d))
                 #make tuple of year, val then sort by year then parse out value
 
