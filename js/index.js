@@ -1,10 +1,5 @@
 /*
 TODO:
-Handle fewer than 13 vars
-tooltip over graph line
-animate paths drawing
-Fill tract by dominant data item (create legend)???
-Visual link between map and graph
 Test hosting on github
 writeup
 Submit!
@@ -25,6 +20,7 @@ var rightLng = -118.224;
 var tractsGroup;
 var mapSvg, graphSvg;
 var tooltip;
+var graphTooltip;
 
 var validYears = ["2000", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2019", "2020", "2021"];
 var validTracts = ["187200","197200","197420","197300","197410","195720","197500","197600","197700","980010","187300"];
@@ -131,6 +127,13 @@ var updateTooltip = function(tractID) {
           .style("top", (d3.event.pageY - 15) + "px");
 };
 
+var updateGraphTooltip = function(variable) {
+  var text = "<h3>" + variable + "</h3></br>";
+  graphTooltip.html(text)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 15) + "px")
+}
+
 var updateTractFill = function() {
   //TODO
   console.log("changing");
@@ -155,9 +158,16 @@ var addDropdownListener = function() {
   });
 
   $("#selectTract").on('change', function() {
+    //set current tract back to black fill
+    d3.select("#CT" + currentTract).style("fill", "black");
     currentTract = $(this).val();
     drawGraph();
   });
+};
+
+var highlightTract = function() {
+  var o = d3.select("#CT" + currentTract);
+  o.style("fill", "#2196F3");
 };
 
 var addMap = function() {
@@ -200,6 +210,11 @@ var addGraph = function() {
                 .attr("class", "box")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.bottom + margin.top);
+
+  graphTooltip = d3.select("body")
+            				.append("div")
+            				.attr("class", "tooltip")
+                    .style("display", "none");
 
   var graphShift = 30;
   xScale = d3.scale.linear()
@@ -297,7 +312,19 @@ var drawGraph = function() {
               .attr("id", variable)
               .style("fill", "None")
               .style("stroke", lineColors[k])
-              .attr("d", lineFunc(lineData));
+              .style("stroke-width", 2)
+              .attr("d", lineFunc(lineData))
+              .on("mouseover", function() {
+                  d3.select(this).style("stroke-width", 5);
+                  graphTooltip.style("display", "inline");
+              })
+              .on("mousemove", function() {
+                  updateGraphTooltip(d3.select(this).attr("id"));
+              })
+              .on("mouseout", function() {
+                  d3.select(this).style("stroke-width", 2);
+                  graphTooltip.style("display", "none");
+              });
 
     var totalLength = path.node().getTotalLength();
     path.attr("stroke-dasharray", totalLength + " " + totalLength)
@@ -307,6 +334,7 @@ var drawGraph = function() {
         .ease("linear")
         .attr("stroke-dashoffset", 0)
   }
+  highlightTract();
 };
 
 $(document).ready(function() {
