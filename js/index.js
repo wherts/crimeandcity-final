@@ -1,11 +1,11 @@
 /*
 TODO:
-Draw graph of housing prices, highlight current year
-
-Fill tract by dominant data item (create legend)
-Animate over all years???
+Dynamic graph updating
+tooltip over graph line
+Fill tract by dominant data item (create legend)???
+Visual link between map and graph
 Test hosting on github
-write on the page
+writeup
 Submit!
 */
 
@@ -28,6 +28,8 @@ var tooltip;
 var validYears = ["2000", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2019", "2020", "2021"];
 var validTracts = ["187200","197200","197420","197300","197410","195720","197500","197600","197700","980010","187300"];
 
+var lineColors = ["#a6cee3","#1f78b4","#b2df8a","#33a02c","#fb9a99","#e31a1c","#fdbf6f","#ff7f00","#cab2d6","#6a3d9a","#ffff99","#b15928","#FFEB3B", "#000000"];
+
 var incomeByYear = {},
     populationByYear = {},
     housingByYear = {};
@@ -40,6 +42,8 @@ var currentYear = validYears[0];
 var currentTract = "187200";
 var currentDataMap = "Population";
 var currentDataGraph = "Population";
+
+var xScale, yScale, yAxis;
 
 var line = d3.svg.line()
               .x(function(d) { return d.x; })
@@ -105,37 +109,6 @@ var pullInMapData = function(callback) {
   callback(null);
 };
 
-// var pullInGraphData = function(callback) {
-//   var incomeByTractLocal = {},
-//       housingByTractLocal = {},
-//       populationByTractLocal = {};
-//   for (var tract in validTracts) {
-//     tract = validTracts[tract];
-//     var prefix = "../json/";
-//
-//     (function(tID) {
-//       incomeFile = prefix + tID + "-income.json";
-//       d3.json(incomeFile, function(error, jsonObj) {
-//         if (error) return console.warn(error);
-//         incomeByTractLocal[tID] = jsonObj;
-//       });
-//
-//       housingFile = prefix + tID + "-housing.json";
-//       d3.json(housingFile, function(error, jsonObj) {
-//         if (error) return console.warn(error);
-//         housingByTractLocal[tID] = jsonObj;
-//       });
-//
-//       populationFile = prefix + tID + "-population.json";
-//       d3.json(populationFile, function(error, jsonObj) {
-//         if (error) return console.warn(error);
-//         populationByTractLocal[tID] = jsonObj;
-//       });
-//     })(tract);
-//   }
-//   callback(null, [incomeByTractLocal, housingByTractLocal, populationByTractLocal]);
-// };
-
 var updateTooltip = function(tractID) {
   var currData;
   if (currentDataMap == "Population") {
@@ -171,6 +144,7 @@ var addRadioListener = function() {
 
   $(".dataTypesGraph").on('click', function() {
     currentDataGraph = $(this).val();
+    drawGraph();
   })
 };
 
@@ -181,6 +155,7 @@ var addDropdownListener = function() {
 
   $("#selectTract").on('change', function() {
     currentTract = $(this).val();
+    drawGraph();
   });
 };
 
@@ -206,16 +181,13 @@ var addMap = function() {
 
 var findMaxY = function(tractDict) {
   var maxY = -1;
-  for (var tract in validTracts) {
-    tract = validTracts[tract];
-    var keys = Object.keys(tractDict[tract]);
-    for (var k in keys) {
-      variable  = keys[k];
-      data = tractDict[tract][variable];
-      currMax = d3.max(data, function(d) {return d;});
-      if (currMax > maxY) {
-        maxY = currMax;
-      }
+  var keys = Object.keys(tractDict);
+  for (var k in keys) {
+    variable  = keys[k];
+    data = tractDict[variable];
+    currMax = d3.max(data, function(d) {return d;});
+    if (currMax > maxY) {
+      maxY = currMax;
     }
   }
   return maxY;
@@ -229,12 +201,12 @@ var addGraph = function() {
                 .attr("height", height + margin.bottom + margin.top);
 
   var graphShift = 30;
-  var xScale = d3.scale.linear()
+  xScale = d3.scale.linear()
                   .domain([0, validYears.length])
                   .range([graphShift, width]);
 
-  var maxY = findMaxY(populationByTract);
-  var yScale = d3.scale.linear()
+  var maxY = findMaxY(populationByTract[currentTract]);
+  yScale = d3.scale.linear()
                   .domain([0, maxY])
                   .range([(height - 45), 0]);
 
@@ -244,18 +216,18 @@ var addGraph = function() {
                 .orient("bottom")
                 .tickSize(-height, 1);
 
-  var yAxis = d3.svg.axis()
-                .scale(yScale)
-                .orient("left")
-                .tickSize(1);
+  yAxis = d3.svg.axis()
+                  .scale(yScale)
+                  .orient("left")
+                  .tickSize(1);
 
   graphSvg.append("g")
-          .attr("class", "axis")
-          .attr("transform", "translate(" + graphShift + ", 0)")
+          .attr("class", "yaxis")
+          .attr("transform", "translate(" + 30 + ", 0)")
           .call(yAxis);
 
   graphSvg.append("g")
-          .attr("class", "axis")
+          .attr("class", "xaxis")
           .attr("transform", "translate(0, " + (height - 45) + ")")
           .call(xAxis);
 
@@ -273,7 +245,45 @@ var addGraph = function() {
 }
 
 var drawGraph = function() {
+  var currDict;
+  if (currentDataGraph == "Population") {
+    currDict = populationByTract;
+  } else if (currentDataGraph == "Housing") {
+    currDict = housingByTract;
+  } else {
+    currDict = incomeByTract;
+  }
 
+  var maxY = findMaxY(currDict[currentTract]);
+  console.log(maxY);
+  yScale = d3.scale.linear()
+                  .domain([0, maxY])
+                  .range([(height - 45), 0]);
+
+  yAxis = d3.svg.axis()
+                  .scale(yScale)
+                  .orient("left")
+                  .tickSize(1);
+
+  graphSvg.select(".yaxis")
+          .call(yAxis);
+
+  var line = d3.svg.line()
+                .x(function(d, i) {return xScale(i) + 20;})
+                .y(function(d) {return yScale(d);});
+
+  var data = currDict[currentTract];
+  var keys = Object.keys(data);
+  for (var k in keys) {
+    var variable = keys[k];
+    var lineData = data[variable];
+    graphSvg.append("path")
+              .attr("class", "line")
+              .attr("id", variable)
+              .style("fill", "None")
+              .style("stroke", lineColors[k])
+              .attr("d", line(lineData));
+  }
 };
 
 $(document).ready(function() {
