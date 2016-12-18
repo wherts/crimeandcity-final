@@ -1,6 +1,6 @@
 /*
 TODO:
-Handle fewer than 13 vars (python append 0's to front)
+Handle fewer than 13 vars
 tooltip over graph line
 animate paths drawing
 Fill tract by dominant data item (create legend)???
@@ -279,17 +279,25 @@ var drawGraph = function() {
                 .x(function(d, i) {return xScale(i) + 20;})
                 .y(function(d) {return yScale(d);});
 
+  var offsetLine = d3.svg.line()
+                      .x(function(d, i) {return xScale(i + 3) + 20;})
+                      .y(function(d) {return yScale(d);})
+
   var data = currDict[currentTract];
   var keys = Object.keys(data);
   for (var k in keys) {
     var variable = keys[k];
     var lineData = data[variable];
+    var lineFunc = line;
+    if (lineData.length < validYears.length) {
+      lineFunc = offsetLine;
+    }
     var path = graphSvg.append("path")
               .attr("class", "line")
               .attr("id", variable)
               .style("fill", "None")
               .style("stroke", lineColors[k])
-              .attr("d", line(lineData));
+              .attr("d", lineFunc(lineData));
 
     var totalLength = path.node().getTotalLength();
     path.attr("stroke-dasharray", totalLength + " " + totalLength)
