@@ -1,7 +1,9 @@
 /*
 TODO:
-Test hosting on github
+click to change focused tract
 writeup
+
+Test hosting on github
 Submit!
 */
 
@@ -75,6 +77,10 @@ var drawTracts = function() {
       .on("mouseout", function(d) {
           tooltip.style("display", "none");
           $("#" + d[0]).attr("class", "");
+      })
+      .on("click", function(d) {
+        $("#selectTract").val(d[0].slice(2));
+        tractChange(d[0].slice(2));
       });
   });
 }
@@ -158,12 +164,15 @@ var addDropdownListener = function() {
   });
 
   $("#selectTract").on('change', function() {
-    //set current tract back to black fill
-    d3.select("#CT" + currentTract).style("fill", "black");
-    currentTract = $(this).val();
-    drawGraph();
+    tractChange($(this).val());
   });
 };
+
+var tractChange = function(newTract) {
+  d3.select("#CT" + currentTract).style("fill", "black");
+  currentTract = newTract;
+  drawGraph();
+}
 
 var highlightTract = function() {
   var o = d3.select("#CT" + currentTract);
