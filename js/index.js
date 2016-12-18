@@ -1,6 +1,7 @@
 /*
 TODO:
-Dynamic graph updating
+Dynamic graph updating - lines
+dynamic graph updating - animation
 tooltip over graph line
 Fill tract by dominant data item (create legend)???
 Visual link between map and graph
@@ -245,6 +246,8 @@ var addGraph = function() {
 }
 
 var drawGraph = function() {
+  d3.selectAll("path.line").remove();
+  
   var currDict;
   if (currentDataGraph == "Population") {
     currDict = populationByTract;
