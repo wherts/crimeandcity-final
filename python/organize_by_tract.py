@@ -23,15 +23,9 @@ def organizeDataByTract(tracts, reader, type):
 
     for tID, valDict in tracts.items():
         for variable, values in valDict.items():
-            # if variable == "American Indian and Alaska Native Population":
-            #     values.insert(0, ("2009", 0))
-            #     values.insert(0, ("2008", 0))
-            #     values.insert(0, ("2000", 0))
             values.sort(key=itemgetter(0))
             tracts[tID][variable] = [item[1] for item in values]
 
-    # for tID, valDict in tracts.items():
-        # for variable, values in valDict.items():
     return tracts
 
 def printDictionary(dictionary):
