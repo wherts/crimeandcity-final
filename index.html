@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.0/d3.js"></script> -->
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="https://d3js.org/queue.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
@@ -78,7 +77,17 @@
 
 
   </div>
-  <div id="mapWrapper"></div>
-  <div id="graphWrapper"></div>
+  <div id="content">
+    <div id="wrapper">
+      <div id="mapWrapper"></div>
+      <div id="graphWrapper"></div>
+    </div>
+    <div id="insights">
+      <p>Throughout Crime and the City, we continually learned about making generalized statements. In truth, we learned about the hazards of making generalized statements. We constantly talked about the importance of understanding nuance. Professor Bloch implored us to understand that grasping nuance - in communities, relationships, actions - is the key to arguing points about that topic. This project is an attempt to help users understand nuance.</p>
+      <p>The topic of gentrification came up frequently in class. Time and again we pressed the idea that gentrification is systematic: it is an established pattern of pushing vulnerable communities out of an area. It can be easy to look at an area and start to make assumptions about what is going on in the community, what used to be there, what will be there, but all of that is merely an assumption. I set out to build a tool that helps someone see nuance in an attempt to help them recognize systematic displacement in Echo Park, Los Angeles, an area that is frequently pointed to as an area of gentrification.</p>
+      <p>One piece of data we can point to as potential evidence for gentrification is in CT197300. If we select that census tract and look at housing data for 2016 on the map and income data on the graph, things begin to come together. The only two income brackets that are consistently falling in the given time period are those families earning less than $25,000 per year. All other income segments, specifically those earning between $100,000 and $199,999 per year, are on the rise. If we look at the map, we can see that currently there are only 62 housing units that cost less than $500 a month in rent. In the second highest bracket alone, $1,500 to $1,999 per year, there are currently 201 units. Flipping the map back five years, to 2011, we see that there are 157 units in the second highest bracket and 169 units that cost less than $500 per month. This is one example of the type of data exploration that this project affords. I am sure that many more examples can be uncovered in just a few minutes of browsing.</p>
+      <p>The one thing that I would have liked to include is building-level data about the types of restuarants and retail in the area. Could we see trends of authentic restuarants and family-owned retail stores replaced by chains and popular brands that cater to the new population in the area? This kind of insight would provide an increasingly nuanced understanding of the changes going on in Echo Park over the past 16 years, but it is, unfortunately, remarkably difficult to find.</p>
+    </div>
+  </div>
   </body>
 </html>

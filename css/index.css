@@ -83,6 +83,15 @@ body {
    margin-left: 40px;
 }
 
+#wrapper {
+  width: auto;
+  height: 700px;
+}
+
+#content {
+  display: block;
+}
+
 #mapWrapper {
   display: inline-block;
   float: left;
@@ -95,6 +104,10 @@ body {
   float: right;
   width: auto;
   margin-right: 40px;
+}
+
+#insights {
+  margin-left: 20px;
 }
 
 path {

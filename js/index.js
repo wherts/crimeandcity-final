@@ -1,7 +1,6 @@
 /*
 TODO:
-click to change focused tract
-writeup
+insights
 
 Test hosting on github
 Submit!
